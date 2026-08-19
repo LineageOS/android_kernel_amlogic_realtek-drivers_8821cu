@@ -20,6 +20,9 @@
 extern void sdio_reinit(void);
 extern void extern_wifi_set_enable(int is_on);
 
+/* Exported function from wifi_dt.c / Kernel 5.15+ */
+extern void set_usb_wifi_power(int is_power);
+
 #if (LINUX_VERSION_CODE < KERNEL_VERSION(3, 14, 0))
 extern void wifi_teardown_dt(void);
 extern int wifi_setup_dt(void);

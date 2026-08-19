@@ -12,10 +12,9 @@
  * more details.
  *
  *****************************************************************************/
-#include <linux/printk.h>		/* pr_info(() */
+#include <linux/printk.h>		/* pr_info() */
 #include <linux/delay.h>		/* msleep() */
 #include "platform_aml_s905_sdio.h"	/* sdio_reinit() and etc */
-
 
 /*
  * Return:
@@ -34,20 +33,17 @@ int platform_wifi_power_on(void)
 	}
 #endif /* kernel < 3.14.0 */
 
-#if 0 /* Seems redundancy? Already done before insert driver */
-	pr_info("######%s:\n", __func__);
-	extern_wifi_set_enable(0);
-	msleep(500);
-	extern_wifi_set_enable(1);
-	msleep(500);
-	sdio_reinit();
-#endif
+	pr_info("%s: set_usb_wifi_power(1)\n", __func__);
+	set_usb_wifi_power(1);
 
 	return ret;
 }
 
 void platform_wifi_power_off(void)
 {
+	pr_info("%s: set_usb_wifi_power(0)\n", __func__);
+	set_usb_wifi_power(0);
+
 #if (LINUX_VERSION_CODE < KERNEL_VERSION(3, 14, 0))
 	wifi_teardown_dt();
 #endif /* kernel < 3.14.0 */
